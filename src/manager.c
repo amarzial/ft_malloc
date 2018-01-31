@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:24:15 by amarzial          #+#    #+#             */
-/*   Updated: 2018/01/31 16:12:57 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:22:57 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 #include "manager.h"
 #include "libft.h"
 
+#include <sys/mman.h>
+
 t_mem_store g_store;
 
+/*
 static void* init_free_list(t_mem_zone* zone, size_t size)
 {
 	unsigned int parts;
@@ -24,13 +27,16 @@ static void* init_free_list(t_mem_zone* zone, size_t size)
 	while (parts--)
 	{
 
-		ft_lstadd(
 	}
-}	
+	return (0);
+}*/
 
 int	init_memory()
 {
-	g_store.page_size = getpagesize();
+	int page_size;
+
+	page_size = getpagesize();
+	g_store.page_size = page_size;
 	g_store.tiny.size = (TINY_SIZE * TINY_COUNT) / page_size + \
 						((TINY_SIZE * TINY_COUNT) % page_size ? page_size : 0); 
 	if ((g_store.tiny.addr = mmap(0, g_store.tiny.size, \
