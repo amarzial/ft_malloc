@@ -10,7 +10,7 @@ OBJECT_DIR = obj/
 OBJECTS = $(addprefix $(OBJECT_DIR), $(OBJECT_FILES))
 
 INCLUDE_FILES = ft_memory.h \
-		   		manager.h
+				manager.h
 INCLUDE_DIR = include/
 INCLUDES = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
@@ -19,20 +19,40 @@ LIBFT_HEADER = $(LIBFT_PATH)includes/
 
 vpath %.c $(SOURCE_DIR)
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fpic
 OFLAGS = -O2
-NAME = malloc.a
 
-all: $(NAME)
+NAME = libft_malloc_$(HOSTTYPE).so
+LINK = libft_malloc.so
+
+ifeq ($(HOSTTYPE), )
+$(eval HOSTTYPE := $(shell uname -m)_$(shell uname -s))
+endif
+
+.PHONY: all clean fclean re link
+
+all: $(NAME) $(LINK)
 
 $(NAME): $(OBJECTS)
-	ar rc $(NAME) $(OBJECTS)
-	ranlib $(NAME)	
-
+	gcc -shared -o $(NAME) $(LIBFT_PATH)libft.a
+	
 $(OBJECT_DIR)%.o: %.c $(INCLUDES)
 	mkdir -p $(OBJECT_DIR)
 	gcc -c -o $@ $(OFLAGS) $(CFLAGS) $< -I$(INCLUDE_DIR) -I$(LIBFT_HEADER)
 
+clean:
+	rm -f $(OBJECTS)
+	rm -rf $(OBJECT_DIR)
+
+fclean: clean
+	rm -f $(LINK)
+	rm -f $(NAME)
+
+re: fclean all
+
+$(LINK): $(NAME)
+	rm -f $(LINK)
+	ln -s $(NAME) $(LINK)
 
 example: src/ft_malloc.c
 	gcc example.c src/ft_malloc.c -I./include
