@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memory.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 12:56:06 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/01 17:38:00 by amarzial         ###   ########.fr       */
+/*   Created: 2018/02/01 17:18:03 by amarzial          #+#    #+#             */
+/*   Updated: 2018/02/01 17:31:38 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MEMORY_H
-#define FT_MEMORY_H
+#include "manager.h"
 
-# include <stdlib.h>
+size_t	page_aligned_size(size_t size)
+{
+	int		page_size;
 
-void			free(void *ptr);
-void			*malloc(size_t size);
-void			*realloc(void *ptr, size_t size);
-
-#endif
+	page_size = getpagesize();
+	return (page_size * ((size / page_size) + (size % page_size ? 1 : 0)));
+}

@@ -1,4 +1,5 @@
 SOURCE_FILES = manager.c \
+			   utils.c \
 			   ft_malloc.c \
 			   #ft_free.h
 SOURCE_DIR = src/
@@ -54,5 +55,5 @@ $(LINK): $(NAME)
 	rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
-example: src/ft_malloc.c
-	gcc example.c src/ft_malloc.c -I./include
+example: $(LINK)
+	gcc -o sample example.c -L. -L./$(LIBFT_PATH) -lft_malloc -lft -I./include -I./$(LIBFT_HEADER)
