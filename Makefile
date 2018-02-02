@@ -1,4 +1,6 @@
 SOURCE_FILES = manager.c \
+			   allocator.c \
+			   list.c \
 			   utils.c \
 			   ft_malloc.c \
 			   #ft_free.h
