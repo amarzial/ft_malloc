@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:24:15 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 18:01:18 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/02 19:06:29 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,35 @@ int			init_memory()
 void		*request_memory(size_t size)
 {
 	t_flist	*mem;
+    t_used  allocation_type;
 
+    allocation_type = USED_ZONE;
     mem = NULL;
 	if (size <= TINY_SIZE)
 		mem = find_free_block(g_store.tiny_free_list);	
 	else if (size <= SMALL_SIZE)
 		mem = find_free_block(g_store.small_free_list);	
 	if (mem == NULL || size > SMALL_SIZE)
+    {
 		mem = alloc_list_insert(&g_store.alloc_list, size);
+        allocation_type = USED_LIST;
+    }
     if (mem == NULL)
         return (NULL);
-    mem->used = 1;
-	return (mem + sizeof(mem));
+    mem->used = allocation_type;
+	return ((char*)mem + sizeof(mem));
+}
+
+void        deallocate_memory(void *ptr)
+{
+    t_flist *block;
+
+    block = (t_flist*)((char*)ptr - sizeof(t_flist));
+    if (block->used == USED_LIST)
+    {
+        alloc_list_delete(&g_store.alloc_list, block);
+        deallocate_page(block, block->content_size + sizeof(t_flist));
+    }
+    else
+        block->used = UNUSED;
 }

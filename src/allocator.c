@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:26:06 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 17:35:31 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/02 19:05:48 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ void    *allocate_page_multi(size_t size)
 	if (res == MAP_FAILED)
         return (NULL);
     return(res);
+}
+
+void    deallocate_page(void *ptr, size_t size)
+{
+    (void)munmap(ptr, size);
 }

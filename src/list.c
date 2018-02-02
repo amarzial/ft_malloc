@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:36:48 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 18:02:25 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:57:29 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ void    *find_free_block(t_flist *list)
 t_flist *alloc_list_insert(t_flist **lst, size_t size)
 {
     t_flist *elem;
+    size_t  allocated_size;
 
-    if((elem = allocate_page_multi(size + sizeof(t_flist))) == NULL)
+    allocated_size = page_aligned_size(size + sizeof(t_flist));
+    if((elem = allocate_page_multi(allocated_size)) == NULL)
         return (NULL);
     elem->used = 1;
-    elem->content_size = size;
+    elem->content_size = allocated_size - sizeof(t_flist);
     elem->prev = NULL;
     elem->next = *lst;
     if (*lst != NULL)
@@ -65,4 +67,14 @@ t_flist *alloc_list_insert(t_flist **lst, size_t size)
     }
     *lst = elem;
     return (elem);
+}
+
+void    alloc_list_delete(t_flist **lst, t_flist *elem)
+{
+   if (*lst == elem)
+       *lst = elem->next;
+   if (elem->next)
+       elem->next->prev = elem->prev;
+   if (elem->prev)
+       elem->prev->next = elem->next;
 }
