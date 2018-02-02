@@ -13,7 +13,7 @@
 #ifndef FT_MEMORY_H
 #define FT_MEMORY_H
 
-# include <stdlib.h>
+# include <stddef.h>
 
 void			free(void *ptr);
 void			*malloc(size_t size);

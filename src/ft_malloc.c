@@ -15,9 +15,6 @@
 #include "ft_memory.h"
 #include "manager.h"
 
-//for mmap
-#include <sys/mman.h>
-
 void	*malloc(size_t size)
 {
 	if (!init_memory())
