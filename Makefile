@@ -20,7 +20,8 @@ LIBFT_HEADER = $(LIBFT_PATH)includes/
 
 vpath %.c $(SOURCE_DIR)
 
-CFLAGS = -Wall -Werror -Wextra -fpic
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 OFLAGS = -O2
 
 NAME = libft_malloc_$(HOSTTYPE).so
@@ -30,16 +31,16 @@ ifeq ($(HOSTTYPE), )
 $(eval HOSTTYPE := $(shell uname -m)_$(shell uname -s))
 endif
 
-.PHONY: all clean fclean re link
+.PHONY: all clean fclean re link test
 
-all: $(NAME) $(LINK)
+all: $(NAME) $(LINK) test
 
 $(NAME): $(OBJECTS)
-	gcc -shared -o $(NAME) $(LIBFT_PATH)libft.a
+	$(CC) $(DEBUG) -shared -o $(NAME) $(OBJECTS) $(LIBFT_PATH)libft.a
 	
 $(OBJECT_DIR)%.o: %.c $(INCLUDES)
 	mkdir -p $(OBJECT_DIR)
-	gcc -c -o $@ $(OFLAGS) $(CFLAGS) $< -I$(INCLUDE_DIR) -I$(LIBFT_HEADER)
+	$(CC) $(DEBUG) -c -fPIC -o $@ $(OFLAGS) $(CFLAGS) $< -I$(INCLUDE_DIR) -I$(LIBFT_HEADER)
 
 clean:
 	rm -f $(OBJECTS)
@@ -55,5 +56,5 @@ $(LINK): $(NAME)
 	rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
-example: $(LINK)
-	gcc -o sample example.c -L. -L./$(LIBFT_PATH) -lft_malloc -lft -I./include -I./$(LIBFT_HEADER)
+test: $(LINK) test.c
+	$(CC) $(DEBUG) -o test test.c -L. -L./$(LIBFT_PATH) -lft_malloc -lft -I./include -I./$(LIBFT_HEADER)
