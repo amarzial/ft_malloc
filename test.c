@@ -1,4 +1,4 @@
-#include "ft_memory.h"
+#include "ft_malloc.h"
 #include "libft.h"
 
 int main ()

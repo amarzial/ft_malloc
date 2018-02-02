@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 19:07:18 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/02 22:55:06 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void        alloc_list_delete(t_flist **lst, t_flist *elem);
 int			init_memory();
 void		*request_memory(size_t size);
 void        deallocate_memory(void *ptr);
+void		*reallocate_memory(void *ptr, size_t size);
 
 size_t		page_aligned_size(size_t size);
 

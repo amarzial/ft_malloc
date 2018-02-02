@@ -2,7 +2,7 @@ SOURCE_FILES = manager.c \
 			   allocator.c \
 			   list.c \
 			   utils.c \
-			   ft_malloc.c \
+			   malloc.c \
 			   #ft_free.h
 SOURCE_DIR = src/
 SOURCES = $(addprefix $(SOURCE_DIR), $(SOURCE_FILES))
@@ -12,7 +12,7 @@ OBJECT_FILES = $(SOURCE_FILES:.c=.o)
 OBJECT_DIR = obj/
 OBJECTS = $(addprefix $(OBJECT_DIR), $(OBJECT_FILES))
 
-INCLUDE_FILES = ft_memory.h \
+INCLUDE_FILES = ft_malloc.h \
 				manager.h
 INCLUDE_DIR = include/
 INCLUDES = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))

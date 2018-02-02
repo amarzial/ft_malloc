@@ -6,11 +6,11 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:24:15 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 19:06:29 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/02 22:59:10 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_memory.h"
+#include "ft_malloc.h"
 #include "manager.h"
 #include "libft.h"
 
@@ -22,6 +22,7 @@ int			init_memory()
 		return (1);
 	init_free_list(&g_store.tiny_free_list, TINY_SIZE, TINY_COUNT);
 	init_free_list(&g_store.small_free_list, SMALL_SIZE, SMALL_COUNT);
+    g_store.initialized = 1;
 	return (1);
 }
 
@@ -44,7 +45,22 @@ void		*request_memory(size_t size)
     if (mem == NULL)
         return (NULL);
     mem->used = allocation_type;
-	return ((char*)mem + sizeof(mem));
+	return ((char*)mem + sizeof(t_flist));
+}
+
+void		*reallocate_memory(void *ptr, size_t size)
+{
+    void    *newptr;
+    t_flist *block;
+
+    block = (t_flist*)((char*)ptr - sizeof(t_flist));
+    if (block->content_size >= size)
+        return (ptr);
+    if ((newptr = request_memory(size)) == NULL)
+        return (NULL);
+    ft_memcpy(newptr, ptr, block->content_size);
+    deallocate_memory(ptr);
+    return(newptr);
 }
 
 void        deallocate_memory(void *ptr)
