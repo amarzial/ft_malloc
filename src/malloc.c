@@ -52,3 +52,13 @@ void    *calloc(size_t nmemb, size_t size)
         return (NULL);
     return ft_memset(ret, 0, nmemb * size);
 }
+
+void    *reallocarray(void *ptr, size_t nmemb, size_t size)
+{
+    size_t  total;
+
+    total = nmemb * size;
+    if (nmemb != 0 && total / nmemb != size)
+        return (NULL);
+    return realloc(ptr, total);
+}
