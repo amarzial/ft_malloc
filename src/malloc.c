@@ -6,11 +6,13 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:52:33 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 16:36:09 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/04 16:50:56 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+
+#include "libft.h"
 
 #include "ft_malloc.h"
 #include "manager.h"
@@ -40,4 +42,13 @@ void	*realloc(void *ptr, size_t size)
     }
     else
         return reallocate_memory(ptr, size);
+}
+
+void    *calloc(size_t nmemb, size_t size)
+{
+    void    *ret;
+
+    if (!(ret = malloc(nmemb * size)))
+        return (NULL);
+    return ft_memset(ret, 0, nmemb * size);
 }
