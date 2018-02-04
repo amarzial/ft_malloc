@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:36:48 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 22:53:43 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/03 19:07:12 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@ int 	init_free_list(t_flist **dest, size_t block_size, size_t block_count)
 	char	*chunk;
 	size_t	pos;
 	t_flist	*tmp;
+	t_flist	*prev;
 
 	chunk = (char*)allocate_page_multi(\
             (block_size + sizeof(t_flist)) * block_count);
     if (chunk == NULL)
 		return (0);
 	pos = 0;
+    prev = NULL;
 	while (pos < block_count)
 	{
 		tmp = (t_flist*)(chunk + (pos * (block_size + sizeof(t_flist))));
 		tmp->used = 0;
 		tmp->content_size = block_size;
 		++pos;
-		tmp->next = (pos != block_count ? tmp + 1 : NULL);
+		tmp->next = (pos != block_count ? (t_flist*)((char*)tmp + block_size + \
+                sizeof(t_flist)) : NULL);
+        tmp->prev = prev;
+        prev = tmp;
 	}
 	*dest = (void*)chunk;
 	return (1);

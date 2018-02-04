@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 22:55:06 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/04 16:38:55 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define USED_ZONE 1
 # define USED_LIST 2
 
-# include <unistd.h>
+# include <stddef.h>
 
 typedef char    t_used;
 
