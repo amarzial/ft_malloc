@@ -6,12 +6,12 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 16:38:55 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/04 20:08:04 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MANAGER_H
-#define MANAGER_H
+# define MANAGER_H
 
 # define TINY_SIZE 64
 # define TINY_COUNT 100
@@ -23,7 +23,7 @@
 
 # include <stddef.h>
 
-typedef char    t_used;
+typedef char	t_used;
 
 typedef struct	s_free_list
 {
@@ -41,36 +41,31 @@ typedef struct	s_mem_block
 	void*	next;
 }				t_mem_block;
 
-typedef struct	s_mem_zone
-{
-	size_t	size;
-	void*	addr;
-}				t_mem_zone;
-
 typedef struct	s_mem_store
 {
 	int				initialized;
-	int 			page_size;
+	int				page_size;
 	t_mem_block		*mem_big;
 	t_flist			*tiny_free_list;
-	t_flist	 		*small_free_list;
-	t_flist	 		*alloc_list;
+	t_flist			*small_free_list;
+	t_flist			*alloc_list;
 
 }				t_mem_store;
 
-int 	    init_free_list(t_flist **dest, size_t block_size, size_t block_count);
-void        *find_free_block(t_flist *list);
-t_flist     *alloc_list_insert(t_flist **lst, size_t size);
-void        alloc_list_delete(t_flist **lst, t_flist *elem);
+int				init_free_list(\
+					t_flist **dest, size_t block_size, size_t block_count);
+void			*find_free_block(t_flist *list);
+t_flist			*alloc_list_insert(t_flist **lst, size_t size);
+void			alloc_list_delete(t_flist **lst, t_flist *elem);
 
-int			init_memory();
-void		*request_memory(size_t size);
-void        deallocate_memory(void *ptr);
-void		*reallocate_memory(void *ptr, size_t size);
+int				init_memory();
+void			*request_memory(size_t size);
+void			deallocate_memory(void *ptr);
+void			*reallocate_memory(void *ptr, size_t size);
 
-size_t		page_aligned_size(size_t size);
+size_t			page_aligned_size(size_t size);
 
-void        *allocate_page_multi(size_t size);
-void        deallocate_page(void *ptr, size_t size);
+void			*allocate_page_multi(size_t size);
+void			deallocate_page(void *ptr, size_t size);
 
 #endif

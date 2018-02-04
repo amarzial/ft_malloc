@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:26:06 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/02 19:05:48 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/04 19:53:23 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 #include <sys/mman.h>
 
-void    *allocate_page_multi(size_t size)
+void	*allocate_page_multi(size_t size)
 {
-    void    *res;
-    res = mmap(0, page_aligned_size(size), \
-			PROT_READ | PROT_WRITE | PROT_EXEC,	MAP_PRIVATE | MAP_ANON, -1, 0);
+	void	*res;
+
+	res = mmap(0, page_aligned_size(size), \
+			PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0);
 	if (res == MAP_FAILED)
-        return (NULL);
-    return(res);
+		return (NULL);
+	return (res);
 }
 
-void    deallocate_page(void *ptr, size_t size)
+void	deallocate_page(void *ptr, size_t size)
 {
-    (void)munmap(ptr, size);
+	(void)munmap(ptr, size);
 }

@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.h                                        :+:      :+:    :+:   */
+/*   test01_sizes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 12:56:06 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 20:03:34 by amarzial         ###   ########.fr       */
+/*   Created: 2018/02/04 20:11:20 by amarzial          #+#    #+#             */
+/*   Updated: 2018/02/04 20:14:53 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MALLOC_H
-# define FT_MALLOC_H
+#include "ft_malloc.h"
+#include "manager.h"
+#include "libft.h"
 
-# include <stddef.h>
+#include <assert.h>
 
-void	free(void *ptr);
-void	*malloc(size_t size);
-void	*realloc(void *ptr, size_t size);
-void	*calloc(size_t nmemb, size_t size);
-void	*reallocarray(void *ptr, size_t nmemb, size_t size);
+int	main(void)
+{
+	char	*buff;
 
-#endif
+	assert(!(buff = (char*)malloc(0)));
+	free(buff);
+	assert(buff = (char*)malloc(TINY_SIZE));
+	free(buff);
+	assert(buff = (char*)malloc(SMALL_SIZE));
+	free(buff);
+	assert(buff = (char*)malloc(SMALL_SIZE * 10));
+	free(buff);
+	return (0);
+}
