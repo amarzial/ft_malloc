@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 20:11:20 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 20:14:53 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/04 21:01:54 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(void)
 {
 	char	*buff;
 
+	buff = NULL;
 	assert(!(buff = (char*)malloc(0)));
 	free(buff);
 	assert(buff = (char*)malloc(TINY_SIZE));

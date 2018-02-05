@@ -1,5 +1,5 @@
-SOURCE_FILES = 01_test.c \
-			   02_test_read_write.c \
+SOURCE_FILES = test01_sizes.c \
+			   test02_read_write.c \
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
