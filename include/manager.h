@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 20:08:04 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/21 15:29:49 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_mem_store
 
 int				init_free_list(\
 					t_flist **dest, size_t block_size, size_t block_count);
+void            *find_existing_block(void* ptr, t_flist *list);
 void			*find_free_block(t_flist *list);
 t_flist			*alloc_list_insert(t_flist **lst, size_t size);
 void			alloc_list_delete(t_flist **lst, t_flist *elem);

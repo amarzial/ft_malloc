@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:36:48 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/04 19:57:49 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/02/21 15:33:20 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ int		init_free_list(t_flist **dest, size_t block_size, size_t block_count)
 	}
 	*dest = (void*)chunk;
 	return (1);
+}
+
+void    *find_existing_block(void* ptr, t_flist *list)
+{
+    while (list != NULL)
+    {
+        if (list == ptr)
+            return(ptr);
+        list = list->next;
+    }
+    return (NULL);
 }
 
 void	*find_free_block(t_flist *list)
