@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:14:34 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/15 17:13:42 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/15 19:32:39 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 #include "libft.h"
 
-extern t_mem_store g_store;
+extern t_mem_store 		g_store;
+extern pthread_mutex_t	g_mutex;
 
-static size_t	show_zone(t_flist* lst)
+static size_t			show_zone(t_flist* lst)
 {
 	t_flist *start;
 	size_t	size;
@@ -36,7 +37,7 @@ static size_t	show_zone(t_flist* lst)
 	return (size);
 }
 
-void			show_alloc_mem()
+void					show_alloc_mem()
 {
 	size_t count;
 
