@@ -3,7 +3,8 @@ SOURCE_FILES = manager.c \
 			   list.c \
 			   utils.c \
 			   malloc.c \
-			   #ft_free.h
+			   extra.c
+
 SOURCE_DIR = src/
 SOURCES = $(addprefix $(SOURCE_DIR), $(SOURCE_FILES))
 

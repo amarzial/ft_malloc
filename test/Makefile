@@ -1,5 +1,6 @@
 SOURCE_FILES = test01_sizes.c \
 			   test02_read_write.c \
+			   test03_random_allocations.c
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -12,11 +13,11 @@ NAME = $(SOURCE_FILES:.c=)
 all: $(NAME)
 	@for executable in $(NAME) ; do \
 		echo "Running $$executable" ;\
-		LD_PRELOAD=../libft_malloc.so ./$$executable ; \
+		DYLD_LIBRARY_PATH=../ ./$$executable ; \
 	done
 
 %: %.c
-	$(CC) $(DEBUG) -o $@ $< -L../libft -lft  -I../include -I../libft/includes
+	$(CC) $(DEBUG) -o $@ $< -Wl,-rpath,../ -L../ -lft_malloc -ldl -L../libft -lft  -I../include -I../libft/includes
 	
 clean:
 
