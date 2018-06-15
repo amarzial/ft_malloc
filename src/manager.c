@@ -45,6 +45,7 @@ void	*request_memory(size_t size)
 	if (mem == NULL)
 		return (NULL);
 	mem->used = allocation_type;
+	mem->content_size = size;
 	return ((char*)mem + sizeof(t_flist));
 }
 
@@ -75,5 +76,8 @@ void	deallocate_memory(void *ptr)
 	}
 	else if (find_existing_block(block, g_store.tiny_free_list) || \
             find_existing_block(block, g_store.small_free_list))
+	{
+		block->content_size = 0;
 		block->used = UNUSED;
+	}
 }

@@ -29,7 +29,7 @@ int		init_free_list(t_flist **dest, size_t block_size, size_t block_count)
 	{
 		tmp = (t_flist*)(chunk + (pos * (block_size + sizeof(t_flist))));
 		tmp->used = 0;
-		tmp->content_size = block_size;
+		tmp->content_size = 0;
 		++pos;
 		tmp->next = (pos != block_count ? (t_flist*)((char*)tmp + block_size + \
 				sizeof(t_flist)) : NULL);
