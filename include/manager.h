@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/02/21 15:29:49 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/16 13:23:25 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,12 @@ typedef struct	s_free_list
 	size_t				content_size;
 	struct s_free_list	*prev;
 	struct s_free_list	*next;
-}				t_alist;
-
-typedef t_alist	t_flist;
-
-typedef struct	s_mem_block
-{
-	void*	ref;
-	void*	next;
-}				t_mem_block;
+}				t_flist;
 
 typedef struct	s_mem_store
 {
 	int				initialized;
 	int				page_size;
-	t_mem_block		*mem_big;
 	t_flist			*tiny_free_list;
 	t_flist			*small_free_list;
 	t_flist			*alloc_list;
