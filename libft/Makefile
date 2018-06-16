@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIC
 OFLAGS = -O2
 SOURCES = ./srcs/ft_abs.c \
 		  ./srcs/ft_bzero.c \
