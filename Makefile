@@ -21,8 +21,6 @@ INCLUDES = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 LIBFT_PATH = ./libft/
 LIBFT_HEADER = $(LIBFT_PATH)includes/
 
-TEST_PATH = ./test/
-
 vpath %.c $(SOURCE_DIR)
 
 CC = gcc -fsanitize=address
@@ -36,7 +34,7 @@ ifeq ($(HOSTTYPE), )
 $(eval HOSTTYPE := $(shell uname -m)_$(shell uname -s))
 endif
 
-.PHONY: all clean fclean re link test
+.PHONY: all clean fclean re link
 
 all: $(NAME) $(LINK)
 
@@ -49,13 +47,11 @@ $(OBJECT_DIR)%.o: %.c $(INCLUDES)
 	$(CC) $(DEBUG) -c -fPIC -o $@ $(OFLAGS) $(CFLAGS) $< -I$(INCLUDE_DIR) -I$(LIBFT_HEADER)
 
 clean:
-	make -C $(TEST_PATH) clean
 	make -C $(LIBFT_PATH) clean
 	rm -f $(OBJECTS)
 	rm -rf $(OBJECT_DIR)
 
 fclean: clean
-	make -C $(TEST_PATH) fclean
 	make -C $(LIBFT_PATH) fclean
 	rm -f $(LINK)
 	rm -f $(NAME)
@@ -65,6 +61,3 @@ re: fclean all
 $(LINK): $(NAME)
 	rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
-
-test: $(LINK)
-	make -C $(TEST_PATH)
