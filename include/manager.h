@@ -6,7 +6,7 @@
 /*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/27 13:15:50 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:16:17 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define MANAGER_H
 
 # define TINY_SIZE 64
-# define TINY_COUNT 100
+# define TINY_COUNT 640
 # define SMALL_SIZE 1024
-# define SMALL_COUNT 100
+# define SMALL_COUNT 120
 # define UNUSED 0
 # define USED_ZONE 1
 # define USED_LIST 2

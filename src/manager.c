@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:24:15 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/18 13:38:50 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/18 15:14:27 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,12 @@ void	deallocate_memory(void *ptr)
 
 	block = (t_flist*)((char*)ptr - sizeof(t_flist));
 	pthread_mutex_lock(&g_mutex);
-	if (find_existing_block(block, g_store.alloc_list))
+	if (block->used == USED_LIST)
 	{
 		alloc_list_delete(&g_store.alloc_list, block);
 		deallocate_page(block, block->content_size + sizeof(t_flist));
 	}
-	else if (find_existing_block(block, g_store.tiny_free_list) || \
-			find_existing_block(block, g_store.small_free_list))
+	else
 	{
 		block->content_size = 0;
 		block->used = UNUSED;

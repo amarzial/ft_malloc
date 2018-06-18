@@ -25,7 +25,7 @@ TEST_PATH = ./test/
 
 vpath %.c $(SOURCE_DIR)
 
-CC = gcc
+CC = gcc -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra
 OFLAGS = -O2
 

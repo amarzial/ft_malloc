@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -fPIC
 OFLAGS = -O2
 SOURCES = ./srcs/ft_abs.c \

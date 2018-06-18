@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:36:48 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/18 13:41:21 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:52:03 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_flist	*alloc_list_insert(t_flist **lst, size_t size)
 	allocated_size = size + sizeof(t_flist);
 	if ((elem = allocate_page_multi(allocated_size)) == NULL)
 		return (NULL);
-	elem->used = 1;
+	elem->used = USED_LIST;
 	elem->content_size = allocated_size - sizeof(t_flist);
 	elem->prev = NULL;
 	elem->next = *lst;
