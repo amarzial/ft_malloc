@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/16 13:23:25 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:15:50 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_mem_store
 
 int				init_free_list(\
 					t_flist **dest, size_t block_size, size_t block_count);
-void            *find_existing_block(void* ptr, t_flist *list);
+void			*find_existing_block(void *ptr, t_flist *list);
 void			*find_free_block(t_flist *list);
 t_flist			*alloc_list_insert(t_flist **lst, size_t size);
 void			alloc_list_delete(t_flist **lst, t_flist *elem);
