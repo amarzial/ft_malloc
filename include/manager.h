@@ -6,7 +6,7 @@
 /*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/27 13:16:17 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:16:58 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@
 
 # include <stddef.h>
 
-typedef char	t_used;
-
-typedef struct	s_free_list
+typedef struct	s_mem_list
 {
-	t_used				used;
 	size_t				content_size;
 	struct s_free_list	*prev;
 	struct s_free_list	*next;
-}				t_flist;
+}				t_mem_list;
 
 typedef struct	s_mem_store
 {
 	int				initialized;
 	int				page_size;
+	t_flist			*tiny_alloc_list;
 	t_flist			*tiny_free_list;
+	t_flist			*small_alloc_list;
 	t_flist			*small_free_list;
-	t_flist			*alloc_list;
+	t_flist			*big_free_list;
+	t_flist			*big_alloc_list;
 
 }				t_mem_store;
 
