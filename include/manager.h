@@ -6,7 +6,7 @@
 /*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/27 13:17:20 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:17:38 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 # define MANAGER_H
 
 # define TINY_SIZE 64
-# define TINY_COUNT 640
-# define SMALL_SIZE 1024
-# define SMALL_COUNT 120
-# define MMASK 0b1
+# define TINY_COUNT 100
+# define SMALL_SIZE 4096
+# define SMALL_COUNT 100
 # define USED_FLAG 1
 # define USED_ZONE 1
 # define USED_LIST 2
-# define BYTE_ALIGN 8
 
 # include <stddef.h>
 
@@ -35,7 +33,7 @@ typedef struct	s_mem_list
 typedef struct	s_chunk_list
 {
 	size_t				content_size;
-	size_t				refcout;
+	size_t				refcount;
 	struct s_chunk_list	*prev;
 	struct s_chunk_list	*next;
 }				t_clist;
@@ -58,12 +56,12 @@ void			*find_free_block(t_mlist *list);
 t_mlist			*alloc_list_insert(t_mlist **lst, size_t size);
 void			alloc_list_delete(t_mlist **lst, t_mlist *elem);
 
-int				init_memory();
 void			*request_memory(size_t size);
 void			deallocate_memory(void *ptr);
 void			*reallocate_memory(void *ptr, size_t size);
 
 size_t			page_aligned_size(size_t size);
+size_t			size_align(size_t size);
 
 void			*allocate_page_multi(size_t size);
 void			deallocate_page(void *ptr, size_t size);

@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:52:33 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/22 19:31:36 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:42:40 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	*malloc(size_t size)
 {
-	if (!size || !init_memory())
+	if (!size)
 		return (NULL);
 	return (request_memory(size));
 }

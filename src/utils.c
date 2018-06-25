@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 17:18:03 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/25 16:02:18 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:48:54 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ size_t	page_aligned_size(size_t size)
 	return (page_size * ((size / page_size) + (size % page_size ? 1 : 0)));
 }
 
-/*
-void	*mem_align(void *ptr)
+size_t	size_align(size_t size)
 {
-	return (ptr % BYTE_ALIGNMENT ? ((char*)BYTE_ALIGNMENT - \
-				(char*)size % (char*)BYTE_ALIGNMENT) + (char*)size : ptrs);
+	return (size % sizeof(size_t) ? (sizeof(size_t) - \
+				size % sizeof(size_t)) + size : size);
 }
-*/
