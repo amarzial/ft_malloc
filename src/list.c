@@ -6,33 +6,33 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:36:48 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/18 13:52:03 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/25 16:20:18 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "manager.h"
 
-int		init_free_list(t_flist **dest, size_t block_size, size_t block_count)
+int		init_free_list(t_mlist **dest, size_t block_size, size_t block_count)
 {
 	char	*chunk;
 	size_t	pos;
-	t_flist	*tmp;
-	t_flist	*prev;
+	t_mlist	*tmp;
+	t_mlist	*prev;
 
 	chunk = (char*)allocate_page_multi(\
-			(block_size + sizeof(t_flist)) * block_count);
+			(block_size + sizeof(t_mlist)) * block_count);
 	if (chunk == NULL)
 		return (0);
 	pos = 0;
 	prev = NULL;
 	while (pos < block_count)
 	{
-		tmp = (t_flist*)(chunk + (pos * (block_size + sizeof(t_flist))));
-		tmp->used = 0;
+		tmp = (t_mlist*)(chunk + (pos * (block_size + sizeof(t_mlist))));
+		//tmp->used = 0;
 		tmp->content_size = 0;
 		++pos;
-		tmp->next = (pos != block_count ? (t_flist*)((char*)tmp + block_size + \
-				sizeof(t_flist)) : NULL);
+		tmp->next = (pos != block_count ? (t_mlist*)((char*)tmp + block_size + \
+				sizeof(t_mlist)) : NULL);
 		tmp->prev = prev;
 		prev = tmp;
 	}
@@ -40,7 +40,7 @@ int		init_free_list(t_flist **dest, size_t block_size, size_t block_count)
 	return (1);
 }
 
-void	*find_existing_block(void *ptr, t_flist *list)
+void	*find_existing_block(void *ptr, t_mlist *list)
 {
 	while (list != NULL)
 	{
@@ -51,27 +51,27 @@ void	*find_existing_block(void *ptr, t_flist *list)
 	return (NULL);
 }
 
-void	*find_free_block(t_flist *list)
+void	*find_free_block(t_mlist *list)
 {
 	while (list != NULL)
 	{
-		if (!list->used)
-			return (list);
+		//if (!list->used)
+		//	return (list);
 		list = list->next;
 	}
 	return (NULL);
 }
 
-t_flist	*alloc_list_insert(t_flist **lst, size_t size)
+t_mlist	*alloc_list_insert(t_mlist **lst, size_t size)
 {
-	t_flist	*elem;
+	t_mlist	*elem;
 	size_t	allocated_size;
 
-	allocated_size = size + sizeof(t_flist);
+	allocated_size = size + sizeof(t_mlist);
 	if ((elem = allocate_page_multi(allocated_size)) == NULL)
 		return (NULL);
-	elem->used = USED_LIST;
-	elem->content_size = allocated_size - sizeof(t_flist);
+	//elem->used = USED_LIST;
+	elem->content_size = allocated_size - sizeof(t_mlist);
 	elem->prev = NULL;
 	elem->next = *lst;
 	if (*lst != NULL)
@@ -85,7 +85,7 @@ t_flist	*alloc_list_insert(t_flist **lst, size_t size)
 	return (elem);
 }
 
-void	alloc_list_delete(t_flist **lst, t_flist *elem)
+void	alloc_list_delete(t_mlist **lst, t_mlist *elem)
 {
 	if (*lst == elem)
 		*lst = elem->next;

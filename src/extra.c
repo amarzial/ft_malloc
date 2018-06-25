@@ -6,7 +6,7 @@
 /*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:14:34 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/18 13:38:22 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/25 16:21:11 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,29 @@
 extern t_mem_store		g_store;
 extern pthread_mutex_t	g_mutex;
 
-static size_t			show_zone(t_flist *lst)
+static size_t			show_zone(t_mlist *lst)
 {
-	t_flist *start;
+	t_mlist *start;
 	size_t	size;
 
 	size = 0;
 	while (lst && lst->next)
 	{
+		/*
 		if (lst->used)
 		{
-			start = (t_flist*)((char*)lst + sizeof(lst));
+			start = (t_mlist*)((char*)lst + sizeof(lst));
 			ft_printf("%p - %p : %u bytes\n", start, start + lst->content_size,\
 					lst->content_size);
 		}
+		*/
 		size += lst->content_size;
 		lst = lst->next;
 	}
 	return (size);
 }
 
+/*
 void					show_alloc_mem(void)
 {
 	size_t count;
@@ -50,3 +53,4 @@ void					show_alloc_mem(void)
 	count += show_zone(g_store.alloc_list);
 	ft_printf("Total : %u bytes\n", count);
 }
+*/

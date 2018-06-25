@@ -23,7 +23,7 @@ LIBFT_HEADER = $(LIBFT_PATH)includes/
 
 vpath %.c $(SOURCE_DIR)
 
-CC = gcc -fsanitize=address
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 OFLAGS = -O2
 
