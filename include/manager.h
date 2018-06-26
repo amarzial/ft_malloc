@@ -6,7 +6,7 @@
 /*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/27 13:17:38 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:17:58 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 
 # include <stddef.h>
 
+//typedef size_t	t_block_head;
+
 typedef struct	s_mem_list
 {
-	size_t				content_size;
 	struct s_mem_list	*prev;
 	struct s_mem_list	*next;
 }				t_mlist;
@@ -44,9 +45,7 @@ typedef struct	s_mem_store
 	int				page_size;
 	t_clist			*tiny_list;
 	t_clist			*small_list;
-	t_mlist			*big_free_list;
-	t_mlist			*big_alloc_list;
-
+	t_mlist			*big_list;
 }				t_mem_store;
 
 int				init_free_list(\
@@ -59,6 +58,11 @@ void			alloc_list_delete(t_mlist **lst, t_mlist *elem);
 void			*request_memory(size_t size);
 void			deallocate_memory(void *ptr);
 void			*reallocate_memory(void *ptr, size_t size);
+
+void			*get_free(t_clist *chunk, size_t size);
+void			*request_big(t_mlist **lst, size_t size);
+int				mem_free(void *ptr, t_clist *lst);
+void			free_big(void *ptr, t_mlist** lst);
 
 size_t			page_aligned_size(size_t size);
 size_t			size_align(size_t size);

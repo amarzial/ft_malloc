@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra.c                                            :+:      :+:    :+:   */
+/*   stat.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ale <ale@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:14:34 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/25 16:21:11 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/26 19:38:39 by ale              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 extern t_mem_store		g_store;
 extern pthread_mutex_t	g_mutex;
 
+/*
 static size_t			show_zone(t_mlist *lst)
 {
 	t_mlist *start;
@@ -25,32 +26,24 @@ static size_t			show_zone(t_mlist *lst)
 	size = 0;
 	while (lst && lst->next)
 	{
-		/*
+		
 		if (lst->used)
 		{
 			start = (t_mlist*)((char*)lst + sizeof(lst));
 			ft_printf("%p - %p : %u bytes\n", start, start + lst->content_size,\
 					lst->content_size);
 		}
-		*/
-		size += lst->content_size;
+		
+		//size += lst->content_size;
 		lst = lst->next;
 	}
 	return (size);
 }
+*/
 
-/*
+
 void					show_alloc_mem(void)
 {
-	size_t count;
-
-	count = 0;
-	ft_printf("TINY : %p\n", g_store.tiny_free_list);
-	count += show_zone(g_store.tiny_free_list);
-	ft_printf("SMALL : %p\n", g_store.small_free_list);
-	count += show_zone(g_store.small_free_list);
-	ft_printf("LARGE : %p\n", g_store.alloc_list);
-	count += show_zone(g_store.alloc_list);
-	ft_printf("Total : %u bytes\n", count);
+	return ;
 }
-*/
+

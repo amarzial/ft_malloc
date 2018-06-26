@@ -1,9 +1,10 @@
 SOURCE_FILES = manager.c \
 			   allocator.c \
-			   list.c \
 			   utils.c \
 			   malloc.c \
-			   extra.c
+			   stat.c \
+			   chunk.c \
+			   big.c
 
 SOURCE_DIR = src/
 SOURCES = $(addprefix $(SOURCE_DIR), $(SOURCE_FILES))
