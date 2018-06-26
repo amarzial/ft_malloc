@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzial <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ale <ale@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:52:33 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/25 17:42:40 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/26 20:03:39 by ale              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 #include "manager.h"
 
 void	*malloc(size_t size)
-{
+{printf("AAAAAAAAAAAAAAAAAAA\n");
 	if (!size)
 		return (NULL);
 	return (request_memory(size));
 }
 
 void	free(void *ptr)
-{
+{printf("mem_realloc(%p)\n", ptr);
 	if (!ptr)
 		return ;
 	deallocate_memory(ptr);
 }
 
 void	*realloc(void *ptr, size_t size)
-{
+{printf("AAAAAAAAAAAAAAAAAAA\n");
 	if (ptr == NULL)
 		return (malloc(size));
 	else if (size == 0)
@@ -45,7 +45,7 @@ void	*realloc(void *ptr, size_t size)
 }
 
 void	*calloc(size_t nmemb, size_t size)
-{
+{printf("AAAAAAAAAAAAAAAAAAA\n");
 	void	*ret;
 
 	if (!(ret = malloc(nmemb * size)))
@@ -54,7 +54,7 @@ void	*calloc(size_t nmemb, size_t size)
 }
 
 void	*reallocarray(void *ptr, size_t nmemb, size_t size)
-{
+{printf("AAAAAAAAAAAAAAAAAAA\n");
 	size_t	total;
 
 	total = nmemb * size;
