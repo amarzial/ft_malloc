@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale <ale@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/26 17:26:24 by ale               #+#    #+#             */
-/*   Updated: 2018/06/26 18:29:16 by ale              ###   ########.fr       */
+/*   Created: 2018/06/27 11:56:46 by amarzial          #+#    #+#             */
+/*   Updated: 2018/06/27 11:59:17 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void	*request_big(t_mlist **lst, size_t size)
 	if (*lst)
 		(*lst)->prev = mem;
 	*lst = mem;
-	return ((char*)mem + sizeof(t_mlist));
+	return ((char*)mem + sizeof(t_mlist) + sizeof(size_t));
 }
 
 static void	unlink_node(t_mlist **lst, t_mlist *node)
 {
 	if (node == *lst)
 	{
+		if (node->next)
+			node->next->prev = NULL;
 		*lst = (*lst)->next;
-		(*lst)->prev = NULL;
 	}
 	else
 	{

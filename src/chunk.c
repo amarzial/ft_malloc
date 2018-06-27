@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale <ale@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/26 15:56:45 by ale               #+#    #+#             */
-/*   Updated: 2018/06/26 18:35:37 by ale              ###   ########.fr       */
+/*   Created: 2018/06/27 11:57:40 by amarzial          #+#    #+#             */
+/*   Updated: 2018/06/27 11:59:36 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	*get_free(t_clist *chunk, size_t size)
 		cursor = (size_t*)((char*)chunk + offset);
 		*cursor = (chunk->content_size - sizeof(size_t)) & ~USED_FLAG;
 	}
-	while (chunk->content_size - offset >= size_align(size) + sizeof(size_t))
+	while (chunk->content_size - (offset - size_align(sizeof(t_clist))) \
+		>= size_align(size) + sizeof(size_t))
 	{
 		cursor = (size_t*)((char*)chunk + offset);
 		if (!(*cursor & USED_FLAG) && ((*cursor & ~USED_FLAG) >= size))
@@ -31,9 +32,9 @@ void	*get_free(t_clist *chunk, size_t size)
 			if (*cursor - size_align(size) >= sizeof(size_t))
 			{
 				*(size_t*)((char*)cursor + sizeof(size_t) + size_align(size)) = \
-					(*cursor - size_align(size)) & ~USED_FLAG;
+					(*cursor - size_align(size) - sizeof(size_t)) & ~USED_FLAG;
 			}
-			*cursor = size;
+			*cursor = size_align(size);
 			*cursor |= USED_FLAG;
 			chunk->refcount += 1;
 			return ((char*)cursor + sizeof(size_t));

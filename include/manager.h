@@ -6,8 +6,9 @@
 /*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:22:04 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/27 13:17:58 by amarzial         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:18:12 by amarzial         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
 /* ************************************************************************** */
 
 #ifndef MANAGER_H
@@ -18,8 +19,6 @@
 # define SMALL_SIZE 4096
 # define SMALL_COUNT 100
 # define USED_FLAG 1
-# define USED_ZONE 1
-# define USED_LIST 2
 
 # include <stddef.h>
 
@@ -66,6 +65,7 @@ void			free_big(void *ptr, t_mlist** lst);
 
 size_t			page_aligned_size(size_t size);
 size_t			size_align(size_t size);
+void			put_hex(void *ptr, int fd);
 
 void			*allocate_page_multi(size_t size);
 void			deallocate_page(void *ptr, size_t size);

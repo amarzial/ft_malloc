@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale <ale@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amarzial <amarzial@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 14:24:15 by amarzial          #+#    #+#             */
-/*   Updated: 2018/06/26 20:02:18 by ale              ###   ########.fr       */
+/*   Created: 2018/06/27 11:09:26 by amarzial          #+#    #+#             */
+/*   Updated: 2018/06/27 11:57:18 by amarzial         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	*new_zone(size_t size)
 
 void	*request_memory(size_t size)
 {
-	printf("mem_request(%lu)\n", size);
 	size_t	*mem;
 	t_clist	*chunk;
 
@@ -71,7 +70,6 @@ void	*request_memory(size_t size)
 
 void	*reallocate_memory(void *ptr, size_t size)
 {
-	printf("mem_realloc(%p)\n", ptr);
 		void    *newptr;
 		size_t	content_size;
 
@@ -87,7 +85,6 @@ void	*reallocate_memory(void *ptr, size_t size)
 
 void	deallocate_memory(void *ptr)
 {
-	printf("mem_dealloc(%p)\n", ptr);
 	if (!mem_free(ptr, g_store.tiny_list) && !mem_free(ptr, g_store.small_list))
 	{
 		free_big(ptr, &g_store.big_list);
